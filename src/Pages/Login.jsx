@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const Login = () => {
@@ -61,7 +61,7 @@ const Login = () => {
        
     
         <div className="mb-6 text-blue-500">
-          <a href="#" className="hover:underline">Forgot Password?</a>
+          <Link to="/auth/register" className="hover:underline">Forgot Password?</Link>
         </div>
     
         <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">Login</button>
