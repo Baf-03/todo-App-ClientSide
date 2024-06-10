@@ -4,8 +4,10 @@ const apiUrl = import.meta.env.VITE_API_URL;
 import axios from "axios";
 import Buttons from "../Components/Buttons";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Todo() {
+  const navigate = useNavigate()
   const {email}= useSelector((state)=>state.userReducer)
   console.log(email)
   let [todo_main_input, set_todo_main_input] = useState("");
@@ -143,8 +145,9 @@ function Todo() {
   return (
     <>
       {/* ---------------------------------Header------------------------------ */}
-      <div className="text-center font-bold p-5 bg-slate-300">
-        Gareboon ke todo list
+      <div className="flex justify-center bg-blue-300 py-5 items-center font-bold">
+        <h2 className="w-[90%] text-center">Encryptodo</h2>
+        <div onClick={()=>{localStorage.removeItem('token');navigate("/auth/login")}}><img className="w-[20px] hover:cursor-pointer" src="https://icons.veryicon.com/png/o/internet--web/website-icons/logout-8.png" alt="" /></div>
       </div>
 
       {/* -----------------------------input field --------------------------------------  */}

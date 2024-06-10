@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Bounce, toast } from 'react-toastify';
 import zxcvbn from 'zxcvbn';
 const apiUrl = import.meta.env.VITE_API_URL;
 const Signup = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [loading,setLoading]=useState(false)
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -69,6 +71,7 @@ const Signup = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true)
     console.log('submit howa');
 
     if (!validateEmail(formData.email)) {
@@ -83,9 +86,21 @@ const Signup = () => {
     try{
         const loginRsp = await axios.post(`${apiUrl}/api/signup`,formData)
         console.log(loginRsp);
+        toast.success(`user Created Now Login`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+          });
         navigate("/auth/login")
     }catch(err){
         console.error(err)
+        setLoading(false)
     }
   
     // Proceed with form submission
@@ -110,6 +125,7 @@ const Signup = () => {
             </label>
             <input
               type="text"
+              disabled={loading}
               id="email"
               name="email"
               className={`w-full border ${
@@ -128,6 +144,7 @@ const Signup = () => {
               Password
             </label>
             <input
+            disabled={loading}
               type="password"
               id="password"
               name="password"
@@ -164,13 +181,14 @@ const Signup = () => {
 
           <button
             type="submit"
+            disabled={loading}
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full"
           >
-            Register
+            {loading?("loading"):"Signup"}
           </button>
         </form>
 
-        <div className="mt-6 text-blue-500 text-center">
+        <div className="mt-6 text-blue-500 text-center" disabled={loading}>
           <Link to="/auth/login" className="hover:underline">
             Already Logged In ...login here
           </Link>
