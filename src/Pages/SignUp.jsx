@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import zxcvbn from 'zxcvbn';
 const apiUrl = import.meta.env.VITE_API_URL;
 const Signup = () => {
-  
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -83,6 +83,7 @@ const Signup = () => {
     try{
         const loginRsp = await axios.post(`${apiUrl}/api/signup`,formData)
         console.log(loginRsp);
+        navigate("/auth/login")
     }catch(err){
         console.error(err)
     }
