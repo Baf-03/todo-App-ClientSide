@@ -60,15 +60,13 @@ const Login = () => {
        
        
     
-        <div className="mb-6 text-blue-500">
-          <Link to="/auth/register" className="hover:underline">Forgot Password?</Link>
-        </div>
+       
     
         <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">Login</button>
       </form>
     
       <div className="mt-6 text-blue-500 text-center">
-        <a href="#" className="hover:underline">Sign up Here</a>
+      <Link to="/auth/register" className="hover:underline">Sign up Here</Link>
       </div>
     </div>
     </div>
